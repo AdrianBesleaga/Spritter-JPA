@@ -10,25 +10,17 @@ import com.cgm.spriTTer.utils.SecurityUtils;
 import com.cgm.spriTTer.utils.TimeUtils;
 
 public class ArtefactBuilder {
-	public static int id = 0;
+	public static Long id = (long) 0;
 	public static Map<String, ArrayList<String>> friends = new HashMap<String, ArrayList<String>>();
 	public static Map<String, User> users = new HashMap<String, User>();
 	public static Map<String, ArrayList<Message>> messages = new HashMap<String, ArrayList<Message>>();
 
 	public static void firstUsers() {
-		if (users.isEmpty()) {
-			new User("adrian", SecurityUtils.md5("123"));
-			new User("alex", SecurityUtils.md5("123"));
-			new User("daniel", SecurityUtils.md5("123"));
-		}
+
 	}
 
 	public static void firstMessages() {
-		if (messages.isEmpty()) {
-			new Message("Hello SpriTTer !!!", "adrian", TimeUtils.currentTime());
-			new Message("Hello Again !!!", "adrian", TimeUtils.currentTime());
-			new Message("What a beautiful day !", "daniel", TimeUtils.currentTime());
-		}
+
 	}
 
 	public static void addUser(User user) {

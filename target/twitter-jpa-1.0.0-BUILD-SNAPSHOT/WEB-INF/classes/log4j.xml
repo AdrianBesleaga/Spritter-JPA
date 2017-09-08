@@ -10,10 +10,11 @@
 		</layout>
 	</appender>
 	
-	<!-- Application Loggers -->
+	<!-- Application Loggers 
 	<logger name="com.endava.sbs">
 		<level value="info" />
 	</logger>
+	-->
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">

@@ -2,21 +2,21 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              http://maven.apache.org/maven-v4_0_0.xsd">
 
-	<!--<parent>-->
-		<groupId>com.cgm.twitter</groupId>
-		<artifactId>twitter</artifactId>
-		<version>1.0.0-BUILD-SNAPSHOT</version>
-	<!--</parent>-->
+	<!--<parent> -->
+	<groupId>com.cgm.twitter</groupId>
+	<artifactId>twitter-jpa</artifactId>
+	<version>1.0.0-BUILD-SNAPSHOT</version>
+	<!--</parent> -->
 
 	<modelVersion>4.0.0</modelVersion>
 	<packaging>war</packaging>
-	<name>Twitter</name>
+	<name>Twitter Jpa</name>
 
 	<properties>
 		<!-- Generic properties -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		
+
 		<!-- JAVA -->
 		<java.version>1.7</java.version>
 		<org.spring-framework.version>4.3.10.RELEASE</org.spring-framework.version>
@@ -42,42 +42,34 @@
 
 		<!-- Hibernate / JPA -->
 		<hibernate.version>4.3.8.Final</hibernate.version>
+		<postgresql.jdbc.version>9.1-901-1.jdbc4</postgresql.jdbc.version>
 
 		<!-- Logging -->
 		<log4j.version>1.2.17</log4j.version>
 		<org.slf4j-version>1.7.5</org.slf4j-version>
 		<logback.version>1.0.13</logback.version>
 
-		<postgresql.jdbc.version>9.1-901-1.jdbc4</postgresql.jdbc.version>
-		
-		<!-- Maven plugins versions -->
-		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
-		<maven-war-plugin.version>2.4</maven-war-plugin.version>
-		<maven-ear-plugin.version>2.9.1</maven-ear-plugin.version>
-		<maven-release-plugin.version>2.5</maven-release-plugin.version>
-
 	</properties>
 
 	<dependencies>
 
-
 		<!-- JSON -->
-<dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-core</artifactId>
-    <version>2.5.0</version>
-</dependency>
-<dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-databind</artifactId>
-    <version>2.5.0</version>
-</dependency>
-<dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-annotations</artifactId>
-    <version>2.5.0</version>
-</dependency>
-		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.5.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.5.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.5.0</version>
+		</dependency>
+
 		<!-- SPRING -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -121,8 +113,8 @@
 			<artifactId>spring-aspects</artifactId>
 			<version>${org.spring-framework.version}</version>
 		</dependency>
-	
-		
+
+
 		<!-- SERVELT & JSTL -->
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
@@ -150,49 +142,51 @@
 			<version>1.2</version>
 		</dependency>
 
-		<!-- commons 
+		<!-- commons <dependency> <groupId>spring-breakout-commons</groupId> <artifactId>spring-breakout-commons</artifactId> 
+			<version>0.0.1</version> <type>jar</type> </dependency> -->
+
+		<!--Logging -->
 		<dependency>
-			<groupId>spring-breakout-commons</groupId>
-			<artifactId>spring-breakout-commons</artifactId>
-			<version>0.0.1</version>
-			<type>jar</type>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.6.1</version>
 		</dependency>
-		-->
 		
-		<!--Logging-->
-<dependency>
-    <groupId>org.slf4j</groupId>
-    <artifactId>slf4j-simple</artifactId>
-    <version>1.6.1</version>
-</dependency>
+		
+	<!-- Spring Data -->
+		<dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.1-901-1.jdbc4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>1.7.2.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>4.3.8.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>4.3.8.Final</version>
+		</dependency>
 		
 	</dependencies>
-	
-<!--
-	<build>
-		<finalName>Twitter</finalName>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>${maven-war-plugin.version}</version>
-				<configuration>
-					<warName>${project.artifactId}</warName>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-	-->
 
-	<description>Twitter</description>
-	
-	
+	<!-- <build> <finalName>Twitter</finalName> <plugins> <plugin> <groupId>org.apache.maven.plugins</groupId> 
+		<artifactId>maven-compiler-plugin</artifactId> <configuration> <source>${java.version}</source> 
+		<target>${java.version}</target> </configuration> </plugin> <plugin> <groupId>org.apache.maven.plugins</groupId> 
+		<artifactId>maven-war-plugin</artifactId> <version>${maven-war-plugin.version}</version> 
+		<configuration> <warName>${project.artifactId}</warName> </configuration> 
+		</plugin> </plugins> </build> -->
+
+	<description>Twitter Jpa</description>
+
+
 </project>

@@ -21,35 +21,30 @@ public class MessageController {
 	public @ResponseBody ServiceResponse message(@RequestBody Message message, HttpServletRequest request) {
 
 		if (message.getText().length() > 3) {
-			new Message(message.getText(), request.getSession().getAttribute("userName").toString(),
-					TimeUtils.currentTime());
+			return new ServiceResponse(message.getText());
 		} else {
 			return new ServiceResponse("Post a longer message ! ", 202);
 		}
 
-		return new ServiceResponse(message.getText());
 	}
-	
-	
-	
+
 	@RequestMapping(method = RequestMethod.DELETE, consumes = "application/json", produces = "application/json")
 	public @ResponseBody ServiceResponse deleteMessage(@RequestBody Message message, HttpServletRequest request) {
 
 		String sessionUserName = SessionUtils.getSessionAttribute(request, "userName");
-		
+
 		if (sessionUserName != null && ArtefactBuilder.messages.containsKey(sessionUserName)) {
-			
-			if(ArtefactBuilder.messages.get(sessionUserName).contains(message)) {
+
+			if (ArtefactBuilder.messages.get(sessionUserName).contains(message)) {
 				ArtefactBuilder.messages.get(sessionUserName).remove(message);
 				return new ServiceResponse("Message Deleted", 200);
-			}else {
+			} else {
 				return new ServiceResponse("Message Not Deleted", 202);
 			}
-			
+
 		} else {
 			return new ServiceResponse("This user has no messages ! ", 202);
 		}
 
-		
 	}
 }

@@ -14,28 +14,13 @@ public class HomeController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	protected @ResponseBody ModelAndView home() {
-		ArtefactBuilder.firstUsers();
-		ArtefactBuilder.firstMessages();
 
-		ModelAndView model;
-
-		model = new ModelAndView("/home");
-		model.addObject("messageList", ArtefactBuilder.messages);
-
-		return model;
+		return new ModelAndView("home", "messageList", ArtefactBuilder.messages);
 	}
 	
-	@RequestMapping(value="home", method = RequestMethod.GET)
+	@RequestMapping(value = "home",method = RequestMethod.GET)
 	protected @ResponseBody ModelAndView sameHome() {
-		ArtefactBuilder.firstUsers();
-		ArtefactBuilder.firstMessages();
-
-		ModelAndView model;
-
-		model = new ModelAndView("/home");
-		model.addObject("messageList", ArtefactBuilder.messages);
-
-		return model;
+		return new ModelAndView("home", "messageList", ArtefactBuilder.messages);
 	}
 
 }

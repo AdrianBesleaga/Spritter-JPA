@@ -7,19 +7,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css"
-	href="/twitter/resources/static/style.css">
+	href="/twitter-jpa/resources/static/style.css">
 <title><%=request.getParameter("title")%></title>
-<base href="http://localhost:8080/twitter/">
+<base href="http://localhost:8080/twitter-jpa/">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/twitter/resources/javascript/functions.js"></script>
+<script src="/twitter-jpa/resources/javascript/functions.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
 </head>
 <body>
 
 	<ul class="headerMenu">
-		<li><a class="btn active" href="/twitter/">Home</a></li>
+		<li><a class="btn active" href="/twitter-jpa/">Home</a></li>
 		<%
 			if (session.getAttribute("userName") == null) {
 		%>
@@ -32,9 +32,9 @@
 			if (session.getAttribute("userName") != null) {
 		%>
 		<li><a id="myProfile" class="btn"
-			href="/twitter/user/<%=session.getAttribute("userName")%>">Profile</a></li>
-		<li><a id="usersLink" class="btn" href="/twitter/users">Users</a></li>
-		<li><a id="logout" class="btn red" href="/twitter/logout">Logout</a></li>
+			href="/twitter-jpa/user/<%=session.getAttribute("userName")%>">Profile</a></li>
+		<li><a id="usersLink" class="btn" href="/twitter-jpa/users">Users</a></li>
+		<li><a id="logout" class="btn red" href="/twitter-jpa/logout">Logout</a></li>
 		<%
 			}
 		%>
