@@ -1,0 +1,105 @@
+body {
+    text-align: center;
+    margin: 0px;
+    width: 100%;
+    height: 1000px;
+	background-color: #dff9ff;
+}
+p {
+    margin: auto;
+}
+#registerForm,
+#loginForm,
+#messageForm,
+#searchForm {
+    width: 200px;
+    position: absolute;
+    border: 1px solid #26419c;
+    padding: 10px;
+    margin: 10px;
+    margin-top: 0px;
+    display: none;
+    background-color: rgb(255, 255, 255);
+}
+
+#messageForm,
+#searchForm{
+	display:block;
+}
+
+.btn {
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 20px;
+    background: #3498db;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    margin: 5px;
+}
+.btn:hover {
+    background: #3cb0fd;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    text-decoration: none;
+}
+input[type=text],
+input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+input[type=number] {
+    width: 20%;
+    box-sizing: border-box;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+li {
+    float: left;
+}
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+li a:hover:not ( .active) {
+    background-color: #111;
+}
+.active {
+    background-color: #4CAF50;
+}
+
+textarea{
+	border: #2793dc 1px solid;
+    text-align: center;
+    margin: auto;
+    color: darkblue;
+    cursor: pointer;
+    resize: none;
+}
+
+.headerMenu{
+	margin-bottom: 10px;
+}
+
+.usersList{
+	width: 30%;
+    margin: auto;
+    border: 1px solid #3498db;
+    text-align: center;
+    font-size: medium;
+    text-transform: uppercase;
+}

@@ -1,0 +1,10 @@
+com\cgm\twitter\controller\UserController.class
+com\cgm\twitter\dto\Message.class
+com\cgm\twitter\controller\HomeController.class
+com\cgm\twitter\controller\FollowController.class
+com\cgm\twitter\dto\ServiceResponse.class
+com\cgm\twitter\controller\LoginController.class
+com\cgm\twitter\controller\MessageController.class
+com\cgm\twitter\controller\RegisterController.class
+com\cgm\twitter\dto\ArtefactBuilder.class
+com\cgm\twitter\dto\User.class
