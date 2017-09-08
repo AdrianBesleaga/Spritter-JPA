@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # SpriTTer
 Twitter Clone made with Spring FrameWork in Java using REST Services with AJAX jQuery
 
@@ -18,3 +19,7 @@ My Website : [https://adrianweb.xyz/](https://adrianweb.xyz/)
 ![alt text](https://raw.githubusercontent.com/AdrianBesleaga/SpriTTer/master/Images/Profile.jpg "Profile")
 ![alt text](https://raw.githubusercontent.com/AdrianBesleaga/SpriTTer/master/Images/Register.jpg "Register")
 ![alt text](https://raw.githubusercontent.com/AdrianBesleaga/SpriTTer/master/Images/Users.jpg "Users")
+=======
+# Spritter-JPA
+Spritter JPA
+>>>>>>> eedb004de026b55116108423c1d1ba49e090ba42
