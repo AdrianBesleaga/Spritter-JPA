@@ -18,7 +18,7 @@ import com.cgm.spriTTer.repository.UserDAO;
 @RestController
 @RequestMapping(value = "/register")
 public class RegisterController {
-	
+
 	@Autowired
 	UserDAO userDAO;
 	@Autowired
@@ -27,19 +27,18 @@ public class RegisterController {
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public @ResponseBody ServiceResponse register(@RequestBody User user, HttpServletRequest request) {
 		String message;
-		/*
-		if (userDAO.findByName(user.getName()).getName() != null) {
+
+		if (userDAO.findByName(user.getName()) != null) {
 			message = "UserName already taken";
 		} else if (user.getName().length() > 3 && user.getPassLength() > 3) {
 			userDAO.save(user);
-			//userDataStore.storeUser(user);
+			// userDataStore.storeUser(user);
 			message = "Registered " + user.getName() + " with id  " + user.getId();
 		} else {
 			message = "Error";
 		}
-		*/
 
-		return new ServiceResponse("Error");
+		return new ServiceResponse(message);
 	}
 
 }

@@ -29,9 +29,8 @@ public class LoginController {
 	public @ResponseBody ServiceResponse login(@RequestBody User user, HttpServletRequest request) {
 
 		String message = "Wrong Login Credentials";
-/*
-		if (user.getName() != null && user.getPassword() != null
-				&& userDAO.findByName(user.getName()).getName() != null) {
+
+		if (user.getName() != null && user.getPassword() != null && userDAO.findByName(user.getName()) != null) {
 			if (user.getPassword().equals(userDAO.findByName(user.getName()).getPassword())) {
 				message = "Logged In";
 				request.getSession().setAttribute("userName", user.getName());
@@ -40,16 +39,7 @@ public class LoginController {
 				request.getSession().removeAttribute("userName");
 			}
 		}
-		
-*/
-		//if(userDAO.findByName(user.getName()) != null) {
-		
-		
 
-		//System.out.println(userDAO.findByName("adrian").getName());
-		
-		//}
-		
 		return new ServiceResponse(message);
 	}
 

@@ -36,40 +36,26 @@ public abstract class AbstractDAO<E> {
 	public E findById(final Long entityId) {
 		return em.find(entityClass, entityId);
 	}
-	
-
 
 	@Transactional
-	public List<User> findByName(final String entityName) {
-		//System.out.println("SELECT id,name FROM "+entityClass.getName()+" WHERE name = '"+entityName+"'");
-		
+	public E findByName(final String entityName) {
+		E result = null;
+		try {
+			CriteriaBuilder cb = em.getCriteriaBuilder();
+			CriteriaQuery<E> cq = cb.createQuery(entityClass);
+			Root<E> root = cq.from(entityClass);
 
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<User> cq = cb.createQuery(User.class);
-		Root user = cq.from(User.class);
+			cq.select(root);
+			cq.where(cb.equal(root.get("name"), entityName));
+			TypedQuery<E> q = em.createQuery(cq);
+			result = q.getSingleResult();
+			// List<E> allitems = q.getResultList();
+			if (result != null) {
+				return result;
+			}
+		} catch (Exception E) {}
 
-		cq.select(user);
-		cq.where(cb.equal(user.get("name"), entityName));
-		TypedQuery<User> q = em.createQuery(cq);
-		List<User> allitems = q.getResultList();
-		
-		/*
-		 * 
-// Select the employees and the mailing addresses that have the same address.
-CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-CriteriaQuery criteriaQuery = criteriaBuilder.createQuery();
-Root employee = criteriaQuery.from(Employee.class);
-Root address = criteriaQuery.from(MailingAddress.class);
-criteriaQuery.multiselect(employee, address);
-criteriaQuery.where(criteriaBuilder.equal(employee.get("address"), address.get("address"));
-Query query = entityManager.createQuery(criteriaQuery);
-List<Object[]> result = query.getResultList();
-		 * 
-		 */
-		
-		return  allitems;
-		
-		//return (E) em.createQuery("SELECT id,name FROM "+entityClass.getName()+" WHERE name = '"+entityName+"'" , entityClass).getSingleResult();
+		return result;
 
 	}
 
