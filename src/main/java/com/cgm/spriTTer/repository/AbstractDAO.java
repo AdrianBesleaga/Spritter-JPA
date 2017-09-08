@@ -4,9 +4,16 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.cgm.spriTTer.domain.User;
 
 @Transactional
 @EnableTransactionManagement
@@ -28,6 +35,42 @@ public abstract class AbstractDAO<E> {
 	@Transactional
 	public E findById(final Long entityId) {
 		return em.find(entityClass, entityId);
+	}
+	
+
+
+	@Transactional
+	public List<User> findByName(final String entityName) {
+		//System.out.println("SELECT id,name FROM "+entityClass.getName()+" WHERE name = '"+entityName+"'");
+		
+
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<User> cq = cb.createQuery(User.class);
+		Root user = cq.from(User.class);
+
+		cq.select(user);
+		cq.where(cb.equal(user.get("name"), entityName));
+		TypedQuery<User> q = em.createQuery(cq);
+		List<User> allitems = q.getResultList();
+		
+		/*
+		 * 
+// Select the employees and the mailing addresses that have the same address.
+CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+CriteriaQuery criteriaQuery = criteriaBuilder.createQuery();
+Root employee = criteriaQuery.from(Employee.class);
+Root address = criteriaQuery.from(MailingAddress.class);
+criteriaQuery.multiselect(employee, address);
+criteriaQuery.where(criteriaBuilder.equal(employee.get("address"), address.get("address"));
+Query query = entityManager.createQuery(criteriaQuery);
+List<Object[]> result = query.getResultList();
+		 * 
+		 */
+		
+		return  allitems;
+		
+		//return (E) em.createQuery("SELECT id,name FROM "+entityClass.getName()+" WHERE name = '"+entityName+"'" , entityClass).getSingleResult();
+
 	}
 
 	@Transactional

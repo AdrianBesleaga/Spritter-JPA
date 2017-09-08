@@ -27,7 +27,8 @@ public class RegisterController {
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public @ResponseBody ServiceResponse register(@RequestBody User user, HttpServletRequest request) {
 		String message;
-		if (ArtefactBuilder.getUsers().containsKey(user.getName())) {
+		/*
+		if (userDAO.findByName(user.getName()).getName() != null) {
 			message = "UserName already taken";
 		} else if (user.getName().length() > 3 && user.getPassLength() > 3) {
 			userDAO.save(user);
@@ -36,8 +37,9 @@ public class RegisterController {
 		} else {
 			message = "Error";
 		}
+		*/
 
-		return new ServiceResponse(message);
+		return new ServiceResponse("Error");
 	}
 
 }

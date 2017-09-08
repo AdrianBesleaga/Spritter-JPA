@@ -58,13 +58,13 @@ public class DBUserDAO implements UserDataStore {
 	public List<User> readUser() {
 		StringBuilder selectStatement = new StringBuilder();
 		selectStatement.append("SELECT * FROM ").append(
-				"sbs_artists");
+				"users");
 
 		List<User> users = null;
 		try {
 			users = jdbcTemplate.query(selectStatement.toString(),
 					new Object[] { }, new UserRowMapper());
-			logger.error("Read list of artists: " + users.size());
+			logger.error("Read list of users: " + users.size());
 		} catch (DataAccessException dae) {
 			logger.error("A database error occured: " + dae.getMessage());
 		}
