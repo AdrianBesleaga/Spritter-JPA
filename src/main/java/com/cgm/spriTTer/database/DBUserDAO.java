@@ -20,27 +20,22 @@ import com.cgm.spriTTer.database.contract.UserDataStore;
 import com.cgm.spriTTer.database.utils.UserRowMapper;
 import com.cgm.spriTTer.domain.User;
 
-
-
-
-
 @Repository("dbUserDAO")
 @EnableTransactionManagement
 public class DBUserDAO implements UserDataStore {
-	
-	public final static Logger logger = LoggerFactory
-			.getLogger(DBUserDAO.class);
+
+	public final static Logger logger = LoggerFactory.getLogger(DBUserDAO.class);
 
 	private SimpleJdbcInsert insertUser;
 	private JdbcTemplate jdbcTemplate;
 
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
-		insertUser = new SimpleJdbcInsert(dataSource)
-				.withTableName("users").usingGeneratedKeyColumns("id");;
+		insertUser = new SimpleJdbcInsert(dataSource).withTableName("users").usingGeneratedKeyColumns("id");
+		;
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-	
+
 	@Transactional
 	public void storeUser(User user) {
 
@@ -53,17 +48,15 @@ public class DBUserDAO implements UserDataStore {
 			logger.error("A database error occured: " + dae.getMessage());
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<User> readUser() {
 		StringBuilder selectStatement = new StringBuilder();
-		selectStatement.append("SELECT * FROM ").append(
-				"users");
+		selectStatement.append("SELECT * FROM ").append("users");
 
 		List<User> users = null;
 		try {
-			users = jdbcTemplate.query(selectStatement.toString(),
-					new Object[] { }, new UserRowMapper());
+			users = jdbcTemplate.query(selectStatement.toString(), new Object[] {}, new UserRowMapper());
 			logger.error("Read list of users: " + users.size());
 		} catch (DataAccessException dae) {
 			logger.error("A database error occured: " + dae.getMessage());
@@ -71,6 +64,5 @@ public class DBUserDAO implements UserDataStore {
 
 		return users;
 	}
-
 
 }

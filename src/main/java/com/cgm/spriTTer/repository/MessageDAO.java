@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cgm.spriTTer.domain.Message;
 
-
 @Repository
 public class MessageDAO extends AbstractDAO<Message> {
 	protected MessageDAO() {

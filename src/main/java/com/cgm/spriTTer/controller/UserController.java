@@ -14,16 +14,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cgm.spriTTer.domain.User;
 import com.cgm.spriTTer.dto.ServiceResponse;
-import com.cgm.spriTTer.repository.MessageDAO;
 import com.cgm.spriTTer.repository.UserDAO;
+import com.cgm.spriTTer.utils.SessionUtils;
 
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
-	
-	@Autowired
-	MessageDAO messageDAO;
-	
+
 	@Autowired
 	UserDAO userDAO;
 
@@ -41,6 +38,9 @@ public class UserController {
 	protected ModelAndView getUser(@PathVariable String name, HttpServletRequest request) throws Exception {
 		ModelAndView model;
 
+		String sessionUserName = SessionUtils.getSessionAttribute(request, "userName");
+		User currentUser = userDAO.findByName(sessionUserName);
+
 		if (userDAO.findByName(name) != null) {
 			User user = userDAO.findByName(name);
 			model = new ModelAndView("user", "userNameText", user.getName());
@@ -49,13 +49,10 @@ public class UserController {
 			model.addObject("userMessages", user.getMessages());
 			model.addObject("userFriends", user.getFriends());
 
-			if (request.getSession().getAttribute("userName") != null) {
-
-				if (user.getFriends().contains(userDAO.findByName(name))) {
-					model.addObject("followButton", "UnFollow");
-				} else {
-					model.addObject("followButton", "Follow");
-				}
+			if (currentUser.getFriends().contains(userDAO.findByName(name))) {
+				model.addObject("followButton", "UnFollow");
+			} else {
+				model.addObject("followButton", "Follow");
 			}
 
 		} else {

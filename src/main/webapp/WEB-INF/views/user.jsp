@@ -23,7 +23,7 @@
 
 		<c:forEach items="${userFriends}" var="friend">
 
-			<a class="friend upper" href="user/${friend}">${friend}</a>
+			<a class="friend upper" href="user/${friend.name}">${friend.name}</a>
 
 		</c:forEach>
 		<br>

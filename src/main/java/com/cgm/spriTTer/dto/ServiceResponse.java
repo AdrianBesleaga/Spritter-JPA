@@ -1,6 +1,8 @@
 package com.cgm.spriTTer.dto;
 
 public class ServiceResponse {
+	private String message = "Operation Succesfull!";
+	private int code = 200;
 
 	public ServiceResponse(String message) {
 		super();
@@ -12,9 +14,6 @@ public class ServiceResponse {
 		this.message = message;
 		this.code = code;
 	}
-
-	private String message = "Operation Succesfull!";
-	private int code = 200;
 
 	public String getMessage() {
 		return message;

@@ -24,19 +24,18 @@
 	</div>
 
 <div class="messages">
-	<c:forEach items="${messageList}" var="map">
-		<p>
-			<c:forEach items="${map.value}" var="message">
+	<c:forEach items="${messageList}" var="message">
+
 
 				<textarea rows="4" cols="50" readonly> ${message.text} </textarea>
 				<p>
-					Posted by : <a class="upper" href="user/${message.user}">${message.user}</a>
+					Posted by : <a class="upper" href="user/${message.user.name}">${message.user.name}</a>
 				</p>
 				<p>${message.date}</p>
 				<br>
 
-			</c:forEach>
-		</p>
+
+
 	</c:forEach>
 	</div>
 	<%

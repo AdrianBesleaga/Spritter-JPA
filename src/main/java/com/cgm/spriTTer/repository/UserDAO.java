@@ -11,11 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cgm.spriTTer.domain.User;
 
 @Repository
-public class UserDAO extends AbstractDAO <User> {
+public class UserDAO extends AbstractDAO<User> {
 	protected UserDAO() {
 		super(User.class);
 	}
-	
+
 	@Transactional
 	public User findByName(final String entityName) {
 		User result = null;
@@ -32,7 +32,8 @@ public class UserDAO extends AbstractDAO <User> {
 			if (result != null) {
 				return result;
 			}
-		} catch (Exception E) {}
+		} catch (Exception E) {
+		}
 
 		return result;
 
