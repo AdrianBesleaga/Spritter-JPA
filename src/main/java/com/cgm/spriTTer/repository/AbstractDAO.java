@@ -38,28 +38,6 @@ public abstract class AbstractDAO<E> {
 	}
 
 	@Transactional
-	public E findByName(final String entityName) {
-		E result = null;
-		try {
-			CriteriaBuilder cb = em.getCriteriaBuilder();
-			CriteriaQuery<E> cq = cb.createQuery(entityClass);
-			Root<E> root = cq.from(entityClass);
-
-			cq.select(root);
-			cq.where(cb.equal(root.get("name"), entityName));
-			TypedQuery<E> q = em.createQuery(cq);
-			result = q.getSingleResult();
-			// List<E> allitems = q.getResultList();
-			if (result != null) {
-				return result;
-			}
-		} catch (Exception E) {}
-
-		return result;
-
-	}
-
-	@Transactional
 	public void save(final E entityToBeSaved) {
 		em.persist(entityToBeSaved);
 	}

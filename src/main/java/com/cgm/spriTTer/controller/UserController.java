@@ -2,6 +2,7 @@ package com.cgm.spriTTer.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -11,13 +12,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.cgm.spriTTer.builder.ArtefactBuilder;
 import com.cgm.spriTTer.domain.User;
 import com.cgm.spriTTer.dto.ServiceResponse;
+import com.cgm.spriTTer.repository.MessageDAO;
+import com.cgm.spriTTer.repository.UserDAO;
 
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
+	
+	@Autowired
+	MessageDAO messageDAO;
+	
+	@Autowired
+	UserDAO userDAO;
 
 	@RequestMapping(method = RequestMethod.GET)
 	protected ModelAndView getUserPage() throws Exception {
@@ -33,19 +41,17 @@ public class UserController {
 	protected ModelAndView getUser(@PathVariable String name, HttpServletRequest request) throws Exception {
 		ModelAndView model;
 
-		if (ArtefactBuilder.users.containsKey(name)) {
-			User user = ArtefactBuilder.users.get(name);
+		if (userDAO.findByName(name) != null) {
+			User user = userDAO.findByName(name);
 			model = new ModelAndView("user", "userNameText", user.getName());
 			model.addObject("userId", user.getId());
 			model.addObject("userPassword", user.getPassword());
-			model.addObject("userMessages", ArtefactBuilder.messages.get(name));
-			model.addObject("userFriends", ArtefactBuilder.friends.get(name));
+			model.addObject("userMessages", user.getMessages());
+			model.addObject("userFriends", user.getFriends());
 
 			if (request.getSession().getAttribute("userName") != null) {
 
-				String sessionUserName = request.getSession().getAttribute("userName").toString();
-				if (ArtefactBuilder.friends.containsKey(sessionUserName)
-						&& ArtefactBuilder.friends.get(sessionUserName).contains(name)) {
+				if (user.getFriends().contains(userDAO.findByName(name))) {
 					model.addObject("followButton", "UnFollow");
 				} else {
 					model.addObject("followButton", "Follow");

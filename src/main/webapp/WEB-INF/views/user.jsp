@@ -34,12 +34,12 @@
 
 			<textarea rows="4" cols="50" readonly> ${message.text} </textarea>
 			<p>
-				Posted by : <a class="upper" href="user/${message.user}">${message.user}</a>
+				Posted by : <a class="upper" href="user/${message.user.name}">${message.user.name}</a>
 			</p>
 			<p>${message.date}</p>
 			
 			<c:if test="${userNameText == sessionScope.userName}">
-			<button value='{"text": "${message.text}" , "user": "${message.user}" , "date": "${message.date}"}' onclick="deleteMessage(this.value)" class="btn red" >Delete Message</button>
+			<button value='{"id": "${message.id}"}' onclick="deleteMessage(this.value)" class="btn red" >Delete Message</button>
 			<br>
 			</c:if>
 

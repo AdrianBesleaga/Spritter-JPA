@@ -29,9 +29,9 @@
 
 
 	<table class="usersList">
-		<c:forEach items="${usersList}" var="map">
+		<c:forEach items="${usersList}" var="user">
 			<tr>
-				<td><a href="user/${map.key}">${map.key}</a>
+				<td><a href="user/${user.name}">${user.name}</a>
 				</td>
 			</tr>
 		</c:forEach>

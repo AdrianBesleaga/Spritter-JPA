@@ -1,6 +1,8 @@
 package com.cgm.spriTTer.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.cgm.spriTTer.builder.ArtefactBuilder;
 import com.cgm.spriTTer.utils.SecurityUtils;
@@ -10,11 +12,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -39,6 +45,15 @@ public class User implements Serializable {
 	
 	@Transient
 	private int passLength;
+	
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id")
+	private List<Message> messages;
+	
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@JoinTable(name = "friends", 
+	joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "friend_id"))
+	private List<User> friends = new ArrayList<User>();
 
 	public User(Long id, String name, String password) {
 		super();
@@ -83,6 +98,22 @@ public class User implements Serializable {
 
 	public void setPassLength(int passLength) {
 		this.passLength = passLength;
+	}
+
+	public List<Message> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(List<Message> messages) {
+		this.messages = messages;
+	}
+
+	public List<User> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(List<User> friends) {
+		this.friends = friends;
 	}
 
 	

@@ -104,9 +104,7 @@ $(document).ready(function() {
 	$("#messageButton").click(function() {
 		var textMessage = document.getElementById('messageText').value;
 		var Data = {
-			"text": textMessage,
-			"user": "",
-			"date": ""
+			"text": textMessage
 		};
 		console.log(textMessage);
 		$.ajax({
