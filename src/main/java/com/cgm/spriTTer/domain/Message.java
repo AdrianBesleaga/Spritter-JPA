@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "messages")
@@ -29,6 +31,7 @@ public class Message implements Serializable {
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "user_id")
+	@JsonIgnore
 	private User user;
 
 	@Column(name = "date")

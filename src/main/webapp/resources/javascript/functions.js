@@ -117,11 +117,10 @@ $(document).ready(function() {
 			contentType: "application/json; charset=utf-8",
 			dataType: "json",
 			success: function(data) {
-				console.log(data);
-				if (data.code == 200) {
-					location.reload();
+				if (data.text.length > 3) {
+					addMessageToDiv(data);
 				}else{
-					$("#messageFormMessage").text(data.message);
+					$("#messageFormMessage").text("Post a longer message!");
 				}
 			},
 			failure: function(errMsg) {
@@ -159,3 +158,51 @@ function deleteMessage(Data) {
 		}
 	});
 }
+
+function getMessages(){
+    if(window.location.href.endsWith("/twitter-jpa/")) {
+    	
+    	var messages = document.getElementById("messages");
+    	messages.innerHTML = "";
+    	
+    	 $.get("messages", function(data, status){   	       
+    		 
+    		  for(var user in data){
+    		      for(var message in data[user]){
+    		    	  console.log("User : " + user + " : " + data[user][message].text + " date : " + new Date(data[user][message].date));
+    		    	  
+    		    	  if(data[user][message].text){
+    		    		  var html = '<textarea rows="4" cols="50" readonly="">'+ data[user][message].text +'</textarea>';
+    		    		  html += '<p>Posted by : <a class="upper" href="user/'+user+'">'+user+'</a></p>';
+    		    		  html += '<p>'+ new Date(data[user][message].date) +'</p>';
+    		    		  html += '<br>';
+    		    		  messages.innerHTML += html;
+    		    	  }
+    		    	  
+    		      }
+    		  }
+    	        
+    	        
+    	    });
+    	 
+    }
+}
+
+function addMessageToDiv(data){
+	
+	var messages = document.getElementById("messages");
+	
+	  if(data.text){
+		  var html = '<textarea rows="4" cols="50" readonly="">'+ data.text +'</textarea>';
+		  html += '<p>Posted by : <a class="upper" href="user/'+data.user.name+'">'+data.user.name+'</a></p>';
+		  html += '<p>'+ new Date(data.date) +'</p>';
+		  html += '<br>';
+		  messages.innerHTML += html;
+	  }
+}
+
+$(document).ready(function () {
+	
+getMessages();
+
+});

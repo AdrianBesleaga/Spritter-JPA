@@ -22,7 +22,6 @@ public class LoginValidator {
 				message = "Logged In";
 				request.getSession().setAttribute("userName", user.getName());
 			} else {
-				message = "Wrong Password";
 				request.getSession().removeAttribute("userName");
 			}
 		}

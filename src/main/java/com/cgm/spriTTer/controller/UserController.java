@@ -27,11 +27,7 @@ public class UserController {
 	@RequestMapping(method = RequestMethod.GET)
 	protected ModelAndView getUserPage() throws Exception {
 
-		ModelAndView model;
-
-		model = new ModelAndView("redirect:/users");
-
-		return model;
+		return new ModelAndView("redirect:/users");
 	}
 
 	@RequestMapping(value = "/{name}", method = RequestMethod.GET)

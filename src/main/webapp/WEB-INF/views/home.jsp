@@ -23,7 +23,7 @@
 		<button id="messageButton" class="btn">Post</button>
 	</div>
 
-<div class="messages">
+<div id="messages" class="messages">
 	<c:forEach items="${messageList}" var="message">
 
 

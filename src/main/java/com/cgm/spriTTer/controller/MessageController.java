@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cgm.spriTTer.domain.Message;
+import com.cgm.spriTTer.dto.MessageDTO;
 import com.cgm.spriTTer.dto.ServiceResponse;
 import com.cgm.spriTTer.validators.MessageValidator;
 
@@ -21,13 +22,10 @@ public class MessageController {
 	MessageValidator validateMessage;
 
 	@RequestMapping(method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-	public @ResponseBody ServiceResponse message(@RequestBody Message message, HttpServletRequest request) {
+	public @ResponseBody MessageDTO message(@RequestBody Message message, HttpServletRequest request) {
 
-		if (validateMessage.validate(message, request)) {
-			return new ServiceResponse(message.getText());
-		} else {
-			return new ServiceResponse("Post a longer message ! ", 202);
-		}
+		return validateMessage.validate(message, request);
+
 
 	}
 

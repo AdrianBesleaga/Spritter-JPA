@@ -31,7 +31,6 @@ public class RegisterController {
 			message = "UserName already taken";
 		} else if (user.getName().length() > 3 && user.getPassLength() > 3) {
 			userDAO.save(user);
-			// userDataStore.storeUser(user);
 			message = "Registered " + user.getName() + " with id  " + user.getId();
 		} else {
 			message = "Error";

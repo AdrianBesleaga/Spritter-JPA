@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cgm.spriTTer.utils.SecurityUtils;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.CascadeType;
@@ -44,10 +45,12 @@ public class User implements Serializable {
 
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
+	@JsonIgnore
 	private List<Message> messages;
 
 	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinTable(name = "friends", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "friend_id"))
+	@JsonIgnore
 	private List<User> friends = new ArrayList<User>();
 
 	public User(Long id, String name, String password) {

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cgm.spriTTer.domain.Message;
+import com.cgm.spriTTer.dto.MessageDTO;
 import com.cgm.spriTTer.dto.ServiceResponse;
 import com.cgm.spriTTer.repository.MessageDAO;
 import com.cgm.spriTTer.repository.UserDAO;
@@ -20,15 +21,15 @@ public class MessageValidator {
 	@Autowired
 	UserDAO userDAO;
 
-	public boolean validate(Message message, HttpServletRequest request) {
+	public MessageDTO validate(Message message, HttpServletRequest request) {
 		String sessionUserName = SessionUtils.getSessionAttribute(request, "userName");
 		if (sessionUserName != null && message.getText().length() > 3) {
 			message.setUser((userDAO.findByName(sessionUserName)));
 			messageDAO.update(message);
-			return true;
+			return new MessageDTO(message.getText(),message.getUser(),message.getDate());
 		}
 
-		return false;
+		return new MessageDTO("",null,null);
 	}
 
 	public ServiceResponse delete(Message message, HttpServletRequest request) {
