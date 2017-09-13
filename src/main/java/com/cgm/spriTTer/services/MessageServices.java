@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.cgm.spriTTer.domain.Message;
 import com.cgm.spriTTer.domain.User;
-import com.cgm.spriTTer.dto.MessageDTO;
 import com.cgm.spriTTer.repository.MessageDAO;
 import com.cgm.spriTTer.repository.UserDAO;
 import com.cgm.spriTTer.utils.SessionUtils;

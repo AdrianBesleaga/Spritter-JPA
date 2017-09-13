@@ -15,7 +15,7 @@
 
 		<input type="text" id="userNameSearch" class="input"
 			placeholder="name" />
-		<p id="registerFormMessage"></p>
+		<div id="searchFormMessage"></div>
 
 		<button id="searchButton" class="btn">Search</button>
 	</div>

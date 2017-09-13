@@ -92,8 +92,13 @@ $(document).ready(function() {
 			dataType: "json",
 			success: function(data) {
 				console.log(data);
-				if (data.code == 200) {
-					location.reload();
+				if (data.code == 200) {					
+					if(data.message.indexOf("Followed") !== -1){
+						$("#followButton").text("UnFollow");
+					}else{
+						$("#followButton").text("Follow");
+					}
+					
 				}
 			},
 			failure: function(errMsg) {
@@ -130,14 +135,25 @@ $(document).ready(function() {
 	});
 
 	$("#searchButton").click(function() {
-		var user = document.getElementById('userNameSearch').value;
-		if (user.length > 1) {
-			window.location.replace("http://localhost:8080/twitter-jpa/user/" + user);
+		var searchName = document.getElementById('userNameSearch').value;
+		if (searchName.length > 1) {
+			
+	    	 $.get("search/"+searchName, function(data, status){ 
+	    		 if(data.indexOf("not exist") !=-1){
+	    			 $("#searchFormMessage").text(data);
+	    		 }else{
+	    			 $("#searchFormMessage").html("<a href='/twitter-jpa//user/"+data+"'> "+data+"</a>");	 
+	    		 }
+	    	 });
+	    	 		
+		}else{
+			$("#searchFormMessage").text("Search something");
 		}
 	});
 });
 
 function deleteMessage(Data) {
+	Message = JSON.parse(Data);
 	$.ajax({
 		type: "DELETE",
 		url: "http://localhost:8080/twitter-jpa/message",
@@ -150,7 +166,7 @@ function deleteMessage(Data) {
 		success: function(data) {
 			console.log(data);
 			if (data.code == 200) {
-				location.reload();
+				$("#message-"+Message.id).remove();
 			}
 		},
 		failure: function(errMsg) {
@@ -160,12 +176,12 @@ function deleteMessage(Data) {
 }
 
 function getMessages(){
-    if(window.location.href.endsWith("/twitter-jpa/")) {
+    if(window.location.href.endsWith("/twitter-jpa/") && document.getElementById("messages")) {
     	
     	var messages = document.getElementById("messages");
     	messages.innerHTML = "";
     	
-    	 $.get("messages", function(data, status){   	       
+    	 $.get("message", function(data, status){   	       
     		 
     		  for(var user in data){
     		      for(var message in data[user]){
